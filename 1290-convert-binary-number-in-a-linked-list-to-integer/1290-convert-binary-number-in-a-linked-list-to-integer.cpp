@@ -15,7 +15,7 @@ public:
         int res = 0;
         
         while(head != NULL){
-            res = (res<< 1)+head->val;
+            res = (res<< 1)+head->val; // res << 1 => res * 2
             head = head->next;
         }
         
