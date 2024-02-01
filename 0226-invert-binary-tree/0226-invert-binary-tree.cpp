@@ -15,9 +15,6 @@ public:
         if(root == NULL){
             return ;
         }
-        // traverse the tree
-        helper(root->left);
-        helper(root->right);
         // tmp node to which will be used to swap nodes
         TreeNode* tmp;
         
@@ -25,6 +22,11 @@ public:
         tmp = root->left;
         root->left = root->right;
         root->right = tmp;
+        
+        // traverse the tree
+        helper(root->left);
+        helper(root->right);
+        
     }
     TreeNode* invertTree(TreeNode* root) {
         helper(root);
