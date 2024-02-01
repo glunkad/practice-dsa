@@ -11,25 +11,47 @@
  */
 class Solution {
 public:
-    void helper(TreeNode* root){
+    void helper1(TreeNode* root){
         if(root == NULL){
             return ;
         }
+        // swap algo
         // tmp node to which will be used to swap nodes
-        TreeNode* tmp;
-        
-        // swap algo 
-        tmp = root->left;
-        root->left = root->right;
-        root->right = tmp;
+        // TreeNode* tmp; 
+        // tmp = root->left;
+        // root->left = root->right;
+        // root->right = tmp;
+        swap(root->left,root->right);
         
         // traverse the tree
-        helper(root->left);
-        helper(root->right);
+        helper1(root->left);
+        helper1(root->right);
         
     }
+    void helper2(TreeNode* root){
+        if(root == NULL){
+            return ;
+        }
+        
+        stack<TreeNode*> st;
+        // push all the tree in stack
+        st.push(root);
+        
+        while(!st.empty()){
+            TreeNode* curr = st.top();
+            st.pop();
+            
+            if(curr == NULL){
+                continue;
+            }
+            
+            helper2(root->left);
+            helper2(root->right);
+            swap(root->left, root->right);
+        }
+    }
     TreeNode* invertTree(TreeNode* root) {
-        helper(root);
+        helper2(root);
         return root;
     }
 };
