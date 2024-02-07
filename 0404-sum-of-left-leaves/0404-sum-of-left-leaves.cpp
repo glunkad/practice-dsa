@@ -11,6 +11,7 @@
  */
 class Solution {
 public:
+    // bfs
     int helper(TreeNode* root){
         int sum = 0;
         queue<TreeNode*> q;
@@ -35,6 +36,20 @@ public:
             }
         }
         return sum;
+    }
+    
+    // dfs inorder
+    void helper(TreeNode* root, int& sum){
+        if(root == NULL){
+            return ;
+        }
+        if(root->left){
+            if(root->left->left == NULL && root->left->right == NULL){
+                sum += root->left->val;
+            }
+        }
+        helper(root->left,sum);
+        helper(root->right,sum);
     }
     int sumOfLeftLeaves(TreeNode* root) {
         return helper(root);
