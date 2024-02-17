@@ -2,22 +2,19 @@ class Solution {
 public:
     vector<int> circularGameLosers(int n, int k) {
         vector<int> mp(n+1,0);
-        
         int person = 1;
-        mp[1]++;
-        bool f = true;
+        mp[person]++;
         
+        bool f = true;
         for(int i = 1; i <= n && f; i++){
-            person = (person+i*k) % n;
-            
-            if(mp[person] == 1){
+            person = ( person + i * k ) % n;
+            if(person == 0){
+                person = n;
+            }
+            if(mp[person] > 0){
                 f = false;
             }
-            if(person == 0){
-                mp[n]++;
-            }
             mp[person]++;
-            
         }
         
         vector<int> v;
