@@ -13,15 +13,9 @@ public:
         for(int& num : nums){
             mp[num]++;
             int x = reverseNum(num);
-            mp[x]++;
-            
+            mp[x]++;    
         }
         
-        int count = 0;
-        for(auto [f,s] : mp){
-            count++;
-        }
-        
-        return count;
+        return size(mp);
     }
 };
