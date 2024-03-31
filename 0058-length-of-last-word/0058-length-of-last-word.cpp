@@ -1,16 +1,11 @@
 class Solution {
 public:
     int lengthOfLastWord(string s) {
-        stringstream ss(s);
-        string tmp;
-        vector<string> v;
-        
-        while(ss >> tmp){
-            v.push_back(tmp);
+        int len = 0;
+        for(int i = s.size() - 1; i >= 0; i--){
+            if(s[i] == ' ' && len > 0) return len;
+            if(s[i] != ' ') len++;
         }
-        
-        tmp = v[v.size() - 1];
-        
-        return tmp.size();
+        return len;
     }
 };
