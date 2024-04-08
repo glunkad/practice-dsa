@@ -9,21 +9,11 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-//         using hashmap
-//         unordered_map<ListNode* , int> mp;
+        ListNode* fast;
+        ListNode* slow;
         
-//         while(head){
-//             if(mp[head] == 1){
-//                 return true;
-//             }
-//             mp[head]++;
-//             head = head->next;
-//         }
-        
-//         return false;
-//         using floyd cycle algorithm
-        ListNode *fast = head;
-        ListNode *slow = head;
+        fast = head;
+        slow = head;
         
         while(fast != NULL && fast->next != NULL){
             fast = fast->next->next;
