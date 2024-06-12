@@ -11,40 +11,31 @@
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
-        // stack<ListNode*> st;
-        // while(head != NULL){
-        //     if(st.size() > 0){
-        //         if(st.top()->val == head->val){
-        //             st.pop();
-        //         }
-        //     }
-        //     else{
-        //         st.push(head);   
-        //     }
-        //     head = head->next;
-        // }
-        // return st.size() == 0;
-        ListNode *slow=head,*fast=head;
-        if(!head->next)  return true;
-        while(fast->next && fast->next->next){              // finding middle of linked list 
-            slow=slow->next;
-            fast=fast->next->next;
+        if(head->next == NULL){
+            return true;
         }
-        ListNode*prev=NULL,*curr=slow->next,*temp;
-        while(curr!=NULL){                                 // reversing the linked list after the middle node
-            temp=curr->next;
-            curr->next=prev;
-            prev=curr;
-            curr=temp;
+        ListNode *fast = head, *slow = head;
+        
+        while(fast->next != NULL && fast->next->next != NULL){
+            slow = slow->next;
+            fast = fast->next->next;
         }
-        slow->next=prev;                                   // joining the reversed linked list after the middle node
-        ListNode *start=head,*mid=slow->next;
-        while(mid){                                        // valued being checked here
-            if(start->val!=mid->val) return false;
-            start=start->next;
-            mid=mid->next;
+        
+        ListNode *curr = slow->next, *prev = NULL, *next;
+        while(curr != NULL){
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+        ListNode *start = head, *mid = prev;
+        while(mid != NULL){
+            if(mid->val != start->val){
+                return false;
+            }
+            mid = mid->next;
+            start = start->next;
         }
         return true;
-        
     }
 };
